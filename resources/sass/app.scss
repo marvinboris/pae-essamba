@@ -1,8 +1,33 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Comfortaa:300,400,500,600,700|Roboto:300,400,500,700,900|Montserrat:300,400,500,600,700,800,900|Montserrat+Alternates:300,400,500,600,700,800,900|Raleway:300,400,500,600,700,800,900&display=swap');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@font-face {
+    font-family: 'Typo Round Demo';
+    src: '';
+}
+
+body {
+    font-family: 'Montserrat', $font-family-sans-serif;
+}
+
+.font-weight-700 {
+    font-weight: 700 !important;
+}
+
+@import 'families';
+@import 'colors';
+@import 'borders';
+@import 'backgrounds';
+
+.nav-item.active {
+    background-color: #011226; 
+    border-left: 15px solid $green !important;
+    padding-left: 33px;
+}
