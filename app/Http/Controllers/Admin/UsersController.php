@@ -17,7 +17,7 @@ class UsersController extends Controller
     public function index()
     {
         //
-        $users = User::all();
+        $users = User::paginate(15);
         return view('admin.users.index', compact('users'));
     }
 
@@ -42,6 +42,9 @@ class UsersController extends Controller
     {
         //
         $input = $request->all();
+        foreach ($input as $key => $value) {
+            $input[$key] = htmlspecialchars($value);
+        }
         $user = User::create($input);
         Session::flash('created_user', 'L\'utilisateur ' . $user->name . ' a été ajouté.');
         return redirect(route('admin.users.index'));
@@ -83,6 +86,9 @@ class UsersController extends Controller
         //
         $user = User::findOrFail($id);
         $input = $request->all();
+        foreach ($input as $key => $value) {
+            $input[$key] = htmlspecialchars($value);
+        }
         $user->update($input);
         Session::flash('updated_user', 'L\'utilisateur ' . $user->name . ' a été modifié.');
         return redirect(route('admin.users.edit', $id));

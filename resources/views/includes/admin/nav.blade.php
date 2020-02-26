@@ -12,16 +12,16 @@
         <div class="col-12 d-flex mb-3 pt-3 px-4 align-items-center" style="height: 111px;">
             <div class="col-12 border-bottom border-secondary d-flex h-100">
                 <div class="rounded-circle border-success border d-flex justify-content-center align-items-center mr-3" style="border-width: 2px !important; height: 60px; width: 60px;">
-                    <img src={{ "https://placehold.it/100x100" }} alt="Felicity Doe" class="rounded-circle" style="object-fit: cover; object-position: center; height: 51px; width: 51px;">
+                    <img src={{ "https://placehold.it/100x100" }} alt="{{ Auth::user()->name }}" class="rounded-circle" style="object-fit: cover; object-position: center; height: 51px; width: 51px;">
                 </div>
                 <div class="py-2">
                     <div class="mr-2 text-white">
-                        <strong class="font-family-montserrat">Felicity Doe</strong>
+                        <strong class="font-family-montserrat">{{ Auth::user()->name }}</strong>
                     </div>
                     <div>
                         <i class="fas fa-circle small text-warning mr-2"></i>
                         <span class="text-success">
-                            Admin
+                            {{ Auth::user()->role->name }}
                         </span>
                     </div>
                 </div>
@@ -36,10 +36,15 @@
                     </div>
                 </a>
 
-                
                 <a href={{ route('admin.pages.index') }} class="{{ "d-flex nav-item justify-content-between align-items-center text-reset text-decoration-none py-3 pr-4" . (Request::segment(2) === "pages" ? " active" : " pl-5") }}">
                     <div>
                             <i class="fas fa-book-open text-success" style="width: 30px;"></i>Pages
+                    </div>
+                </a>
+
+                <a href={{ route('admin.posts.index') }} class="{{ "d-flex nav-item justify-content-between align-items-center text-reset text-decoration-none py-3 pr-4" . (Request::segment(2) === "posts" ? " active" : " pl-5") }}">
+                    <div>
+                            <i class="fas fa-mail-bulk text-success" style="width: 30px;"></i>Posts
                     </div>
                 </a>
     
@@ -55,7 +60,7 @@
                     </div>
                 </a>
     
-                <a href="#" class="{{ "d-flex nav-item justify-content-between align-items-center text-reset text-decoration-none py-3 pr-4" . (Request::segment(2) === "notifications" ? " active" : " pl-5") }}">
+                <a href="{{ route('admin.notifications') }}" class="{{ "d-flex nav-item justify-content-between align-items-center text-reset text-decoration-none py-3 pr-4" . (Request::segment(2) === "notifications" ? " active" : " pl-5") }}">
                     <div>
                         <i class="fas fa-comment text-success" style="width: 30px;"></i>Notifications
                     </div>

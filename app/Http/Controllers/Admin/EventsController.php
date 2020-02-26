@@ -17,8 +17,8 @@ class EventsController extends Controller
     public function index()
     {
         //
-        $events = Event::all();
-        return view('admin.events.index', compact('events'));
+        $events = Event::paginate(15);
+        return view('pages.admin.events.index', compact('events'));
     }
 
     /**
@@ -29,7 +29,7 @@ class EventsController extends Controller
     public function create()
     {
         //
-        return view('admin.events.create');
+        return view('pages.admin.events.create');
     }
 
     /**
@@ -41,7 +41,12 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         //
-        $input = $request->all();
+        $input = $request->except(['content_fr', 'content_en']);
+        foreach ($input as $key => $value) {
+            $input[$key] = htmlspecialchars($value);
+        }
+        $input['content_fr'] = $request->content_fr;
+        $input['content_en'] = $request->content_en;
         $event = Event::create($input);
         Session::flash('created_event', 'L\'évènement ' . $event->title_fr . ' a été ajouté.');
         return redirect(route('admin.events.index'));
@@ -68,7 +73,7 @@ class EventsController extends Controller
     {
         //
         $event = Event::findOrFail($id);
-        return view('admin.events.edit', compact('event'));
+        return view('pages.admin.events.edit', compact('event'));
     }
 
     /**
@@ -82,7 +87,12 @@ class EventsController extends Controller
     {
         //
         $event = Event::findOrFail($id);
-        $input = $request->all();
+        $input = $request->except(['content_fr', 'content_en']);
+        foreach ($input as $key => $value) {
+            $input[$key] = htmlspecialchars($value);
+        }
+        $input['content_fr'] = $request->content_fr;
+        $input['content_en'] = $request->content_en;
         $event->update($input);
         Session::flash('updated_event', 'L\'évènement ' . $event->title_fr . ' a été modifié.');
         return redirect(route('admin.events.edit', $id));

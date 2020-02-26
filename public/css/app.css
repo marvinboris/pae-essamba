@@ -10669,6 +10669,10 @@ body {
   font-family: Roboto, "Nunito", sans-serif;
 }
 
+.font-family-montserrat {
+  font-family: Montserrat, "Nunito", sans-serif;
+}
+
 .text-logo {
   color: #6ec102 !important;
 }

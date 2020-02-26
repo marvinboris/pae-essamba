@@ -1056,7 +1056,7 @@ class PagesTableSeeder extends Seeder
             'top_menu' => true,
             'url' => '/',
             'banner' => false,
-            'route_name' => 'welcome'
+            'route_name' => 'home'
         ]);
 
         // Pae Essamba pages
@@ -1477,7 +1477,7 @@ class PagesTableSeeder extends Seeder
             'top_menu' => false,
             'url' => '/pae-essamba/about',
             'banner' => false,
-            'route_name' => 'pae-essamba.about'
+            'route_name' => 'pae-essamba.about_us'
         ]);
 
         Page::create([

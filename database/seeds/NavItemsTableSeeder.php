@@ -25,7 +25,7 @@ class NavItemsTableSeeder extends Seeder
 
         NavItem::create([
             'title_en' => 'Posts',
-            'title_fr' => 'Postes'
+            'title_fr' => 'Posts'
         ]);
 
         NavItem::create([

@@ -14,7 +14,7 @@
                 <div class="col-md-3 col-sm-3">
                     <div id="newlsetterForm" class="clearfix">
                         <h3>Contacts</h3>
-                        <p><i class="fa fa-home">&nbsp;</i> <span>Addresse:</span> 70 Rue Alfred Saker, Douala, Cameroun
+                        <p><i class="fa fa-home">&nbsp;</i> <span>Address:</span> 70 Rue Alfred Saker, Douala, Cameroun
                         </p>
                         <p><i class="fa fa-phone-square">&nbsp;</i> <span>Phone:</span> +237 123 456 789</p>
                         <p><i class="fa fa-envelope-o">&nbsp;</i> <span>Email:</span> infos@pae-essamba.net</p>
@@ -23,12 +23,13 @@
                 <div class="col-md-3 col-sm-3">
                     <div id="tweets" class="clearfix">
                         <h3>Subscribe to Newsletter</h3>
-                        <form id="frmNewletter" name="frmNewletter" action="#" method="post">
+                        <form id="frmNewletter" name="frmNewletter" action="{{ route('newsletter') }}" method="post">
+                            @csrf
                             <div class="input-group subscriber-form">
-                                <input type="text" class="form-control" placeholder="Enter email" required>
+                                <input type="email" class="form-control" name="email" style="color: white;" placeholder="Enter email" required>
                                 <span class="input-group-btn">
                                     <button class="btn-search" type="submit"
-                                        style="color: #b2f21c;background-color: white;">
+                                        style="color: grey;background-color: white;">
                                         Submit
                                     </button>
                                 </span>

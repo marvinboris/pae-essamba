@@ -1,5 +1,5 @@
 @include('includes.app.head')
-
-@yield('content')
-
+<main class="py-4">
+    @yield('content')
+</main>
 @include('includes.app.foot')

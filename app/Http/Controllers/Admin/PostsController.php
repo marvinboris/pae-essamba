@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\PostCategory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class PostsController extends Controller
@@ -17,8 +19,8 @@ class PostsController extends Controller
     public function index()
     {
         //
-        $posts = Post::all();
-        return view('admin.posts.index', compact('posts'));
+        $posts = Post::paginate(15);
+        return view('pages.admin.posts.index', compact('posts'));
     }
 
     /**
@@ -29,7 +31,8 @@ class PostsController extends Controller
     public function create()
     {
         //
-        return view('admin.posts.create');
+        $post_categories = PostCategory::all();
+        return view('pages.admin.posts.create', compact('post_categories'));
     }
 
     /**
@@ -41,9 +44,15 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         //
-        $input = $request->all();
+        $input = $request->except(['content_fr', 'content_en']);
+        foreach ($input as $key => $value) {
+            $input[$key] = htmlspecialchars($value);
+        }
+        $input['content_fr'] = $request->content_fr;
+        $input['content_en'] = $request->content_en;
+        $input['user_id'] = Auth::id();
         $post = Post::create($input);
-        Session::flash('created_post', 'Le poste ' . $post->title_fr . ' a été ajouté.');
+        Session::flash('created_post', 'Le post ' . $post->title_fr . ' a été ajouté.');
         return redirect(route('admin.posts.index'));
     }
 
@@ -68,7 +77,7 @@ class PostsController extends Controller
     {
         //
         $post = Post::findOrFail($id);
-        return view('admin.posts.edit', compact('post'));
+        return view('pages.admin.posts.edit', compact('post'));
     }
 
     /**
@@ -82,10 +91,12 @@ class PostsController extends Controller
     {
         //
         $post = Post::findOrFail($id);
-        $input = $request->all();
+        $input = $request->except(['content_fr', 'content_en']);
         foreach ($input as $key => $value) {
             $input[$key] = htmlspecialchars($value);
         }
+        $input['content_fr'] = $request->content_fr;
+        $input['content_en'] = $request->content_en;
         $post->update($input);
         Session::flash('updated_post', 'Le poste ' . $post->title_fr . ' a été modifié.');
         return redirect(route('admin.posts.edit', $id));
